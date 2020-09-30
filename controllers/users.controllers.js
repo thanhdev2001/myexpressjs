@@ -2,14 +2,12 @@ var db = require('../db')
 const shortid = require('shortid')
 
 module.exports.index = function(req, res) {
-  console.log(req.cookies)
     res.render('index', {
       users: db.get('users').value()
     })
   }
 
 module.exports.GetUsers = function(req, res){
-    console.log(req.cookies)
     res.render('list/users', {
       users: db.get('users').value()
     })

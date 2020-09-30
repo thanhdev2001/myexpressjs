@@ -3,10 +3,13 @@ const app = express()
 const port = 3000
 
 var controller = require('./controllers/users.controllers')
+var authController = require('./controllers/auth.controller')
 var db = require('./db')
 const shortid = require('shortid')
 
 var validate = require('./validate/user.validate')
+
+var authMiddleware = require('./middlewares/auth.middleware')
 
 var cookieParser = require('cookie-parser')
 app.use(cookieParser())
@@ -26,19 +29,23 @@ app.get('/users/cookie', function(req, res, next){
   res.send('Helloo')
 })
 
-app.get('/users', controller.GetUsers)
+app.get('/users', authMiddleware.requireAuth, controller.GetUsers)
+
+app.get('/auth/login', authController.login)
 
 app.get('/users/search', controller.search)
 
-app.get('/users/create', controller.create)
+app.get('/users/create', authMiddleware.requireAuth, controller.create)
 
 app.get('/users/id/:id', controller.getId)
 
-app.get('/users/remove', controller.RefreshRemove)
+app.get('/users/remove', authMiddleware.requireAuth, controller.RefreshRemove)
 
 app.get('/users/remove/id/:id', controller.remove)
 
 app.post('/users/create', validate.PostCreate, controller.PostCreate)
+
+app.post('/auth/login', authController.postLogin)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
