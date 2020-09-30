@@ -1,0 +1,18 @@
+extends ../layouts/common
+
+block content
+    div.ml-5.mr-5
+        h1.mt-5.mb-5 Remove users
+
+        .d-flex.align-item-center
+        table.table
+                tr
+                    th Name
+                    th Phone
+                    th Action
+                each user in users
+                    tr
+                        td= user.name
+                        td= user.phone
+                        td
+                            a.btn.btn-light(href="/users/remove/id/" + user.id) Remove
