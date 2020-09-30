@@ -12,7 +12,7 @@ var validate = require('./validate/user.validate')
 var authMiddleware = require('./middlewares/auth.middleware')
 
 var cookieParser = require('cookie-parser')
-app.use(cookieParser())
+app.use(cookieParser('abc'))
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -23,11 +23,6 @@ app.set('views', './views')
 app.use(express.static('public'))
 
 app.get('/', controller.index)
-
-app.get('/users/cookie', function(req, res, next){
-  res.cookie("user-id", 111)
-  res.send('Helloo')
-})
 
 app.get('/users', authMiddleware.requireAuth, controller.GetUsers)
 
