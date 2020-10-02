@@ -9,11 +9,14 @@ block content
     div.ml-5.mr-5
         h1.mt-5 Create user
 
-        form(action="/users/create", method="POST")
+        form(action="/users/create", method="POST", enctype="multipart/form-data")
             .form-group
                 label(for='name') Name
                 input#name.form-control(type='text', name="name", value= values ? values.name : '')
             .form-group
                 label(for='phone') Phone
                 input#phone.form-control(type='text', name="phone", value= values ? values.phone : '')
+            .form-group
+                label(for='avatar') Avatar
+                input#avatar.form-control-file(type='file', name="avatar")
             button.btn.btn-primary(type='submit') Create

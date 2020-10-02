@@ -6,3 +6,8 @@ block content
         b Name: 
         span= user.name
     
+    form(action="/users/id/" + user.id, method="POST", enctype="multipart/form-data")
+            .form-group
+                label(for='avatar') Change avatar
+                input#avatar.form-control-file(type='file', name="avatar")
+            button.btn.btn-primary(type='submit') Submit
