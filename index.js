@@ -4,10 +4,13 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+
 var controller = require('./controllers/users.controllers')
 var authController = require('./controllers/auth.controller')
 var db = require('./db')
+var mongoose = require('mongoose');
 const shortid = require('shortid')
+
 
 var multer  = require('multer')
 var upload = multer({ dest: 'public/uploads/' })
@@ -26,6 +29,8 @@ app.set('view engine', 'pug')
 app.set('views', './views')
 
 console.log(process.env.SESSION_SECRET)
+
+mongoose.connect(process.env.MONGO_URL)
 
 app.use(express.static('public'))
 
