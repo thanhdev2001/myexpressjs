@@ -7,11 +7,14 @@ block content
         .d-flex.align-item-center
         table.table
                 tr
+                    th Avatar
                     th Name
                     th Phone
                     th Action
                 each user in users
                     tr
+                        td
+                            img(src=user.avatar, alt="image", width="50")
                         td= user.name
                         td= user.phone
                         td
